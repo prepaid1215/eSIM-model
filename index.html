@@ -4,28 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>eSIM 단말모델명 생성기</title>
+
 <style>
 :root{
   --bg:#edf4fb;
-  --card:#ffffff;
+  --card:#fff;
   --text:#243447;
   --muted:#6b7f93;
   --line:#d7e4f0;
   --accent:#4f8fcf;
   --accent2:#356da8;
   --soft:#f5f9fd;
-  --shadow:0 10px 24px rgba(79,143,207,.12);
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
 html,body{
   margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif;
 }
-body{padding-bottom:40px}
-button,input{font:inherit}
-button{touch-action:manipulation;cursor:pointer}
+
+body{
+  padding-bottom:40px;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  touch-action:manipulation;
+}
 
 .wrap{
   max-width:520px;
@@ -34,7 +49,6 @@ button{touch-action:manipulation;cursor:pointer}
 }
 
 .header{
-  background:var(--bg);
   padding:calc(env(safe-area-inset-top) + 16px) 0 8px;
 }
 
@@ -42,7 +56,6 @@ h1{
   margin:0;
   font-size:23px;
   font-weight:900;
-  line-height:1.25;
 }
 
 .sub{
@@ -59,7 +72,6 @@ h1{
   border:1px solid var(--line);
   border-radius:999px;
   background:#fff;
-  color:var(--text);
   font-weight:800;
 }
 
@@ -69,7 +81,6 @@ h1{
   background:var(--card);
   border:1px solid #e2edf7;
   border-radius:18px;
-  box-shadow:var(--shadow);
 }
 
 .step{
@@ -93,7 +104,9 @@ h1{
   flex:0 0 29px;
 }
 
-.step strong{font-size:16px}
+.step strong{
+  font-size:16px;
+}
 
 .step small{
   display:block;
@@ -103,7 +116,8 @@ h1{
   line-height:1.4;
 }
 
-.brand-grid{
+.brand-grid,
+.purchase-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
@@ -119,11 +133,12 @@ h1{
   color:var(--text);
 }
 
-.brand-btn.active{
+.brand-btn.active,
+.choice.active,
+.storage-btn.active{
   background:var(--accent);
   border-color:var(--accent);
   color:#fff;
-  box-shadow:0 8px 18px rgba(79,143,207,.18);
 }
 
 .category-grid{
@@ -132,14 +147,15 @@ h1{
   gap:9px;
 }
 
-.cat-btn{
-  min-height:48px;
+.cat-btn,
+.choice,
+.storage-btn{
+  min-height:50px;
   border:1px solid var(--line);
   border-radius:14px;
   background:#fff;
-  color:#40566d;
+  color:var(--text);
   font-weight:900;
-  font-size:14px;
 }
 
 .cat-btn.active{
@@ -150,7 +166,6 @@ h1{
 
 .model-list{
   display:grid;
-  grid-template-columns:1fr;
   gap:10px;
 }
 
@@ -171,90 +186,21 @@ h1{
   padding:11px 13px;
 }
 
-.model-sub{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-.condition-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.condition-btn{
-  min-height:54px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  color:var(--text);
-  font-weight:900;
-}
-
-.condition-btn.active{
-  background:#eaf3fc;
-  border-color:#8bb8df;
-  color:#315e88;
-  box-shadow:0 6px 14px rgba(79,143,207,.12);
-}
-
-.condition-note{
-  margin-top:10px;
-  padding:12px;
-  border-radius:13px;
-  background:#f4f9fe;
-  border:1px solid #dbe8f4;
-  color:#60758a;
-  font-size:12px;
-  line-height:1.55;
-}
-
 .storage-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
 }
 
-.storage-btn{
-  min-height:56px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  color:var(--text);
-  font-weight:900;
-}
-
-.storage-btn.active{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#fff;
-}
-
-.selected{
-  margin-top:12px;
-  min-height:56px;
-  padding:13px 14px;
-  border:1px solid #dfeaf5;
-  border-radius:14px;
-  background:#f7fbff;
-  display:flex;
-  align-items:center;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.more-btn{
-  width:100%;
-  min-height:48px;
-  margin-top:12px;
-  border:1px dashed #a9c7e0;
-  border-radius:14px;
-  background:#f7fbff;
-  color:#4b6f91;
-  font-weight:900;
+.note{
+  margin-top:10px;
+  padding:12px;
+  border:1px solid #dbe8f4;
+  border-radius:13px;
+  background:#f4f9fe;
+  color:#60758a;
+  font-size:12px;
+  line-height:1.55;
 }
 
 .manual{
@@ -280,7 +226,16 @@ h1{
   background:#fff;
   padding:0 14px;
   font-size:16px;
-  outline:none;
+}
+
+.selected{
+  margin-top:12px;
+  padding:13px 14px;
+  border:1px solid #dfeaf5;
+  border-radius:14px;
+  background:#f7fbff;
+  font-size:14px;
+  line-height:1.5;
 }
 
 .result-card{
@@ -289,7 +244,6 @@ h1{
   background:#f9fcff;
   border:1px solid #cfe0ee;
   border-radius:18px;
-  box-shadow:var(--shadow);
 }
 
 .result-label{
@@ -318,7 +272,9 @@ h1{
   font-weight:900;
 }
 
-.copy:disabled{opacity:.35}
+.copy:disabled{
+  opacity:.35;
+}
 
 .status{
   margin-top:7px;
@@ -327,9 +283,11 @@ h1{
   color:var(--muted);
 }
 
-.hidden{display:none!important}
+.hidden{
+  display:none!important;
+}
 
-@media (max-width:420px){
+@media(max-width:420px){
   .category-grid{
     grid-template-columns:repeat(3,1fr);
   }
@@ -342,10 +300,12 @@ h1{
 <header class="header">
   <div class="wrap">
     <h1>eSIM 단말모델명 생성기</h1>
+
     <p class="sub">
-      아이폰/갤럭시 → 시리즈 → 기종 → 용량 순서로 선택하세요.
+      전문용어를 몰라도 구입한 방법만 선택하면 됩니다.
     </p>
-    <button type="button" class="reset" id="resetBtn">
+
+    <button class="reset" id="resetBtn">
       처음부터
     </button>
   </div>
@@ -353,762 +313,769 @@ h1{
 
 <main class="wrap">
 
-  <div class="card">
-    <div class="step">
-      <div class="num">1</div>
-      <div>
-        <strong>휴대폰 종류</strong>
-        <small>아이폰 또는 갤럭시를 선택하세요.</small>
-      </div>
-    </div>
+<div class="card">
 
-    <div class="brand-grid">
-      <button type="button" class="brand-btn" data-brand="iphone">
-        아이폰
-      </button>
+  <div class="step">
+    <div class="num">1</div>
 
-      <button type="button" class="brand-btn" data-brand="galaxy">
-        갤럭시
-      </button>
+    <div>
+      <strong>휴대폰 종류</strong>
+      <small>아이폰 또는 갤럭시를 선택하세요.</small>
     </div>
   </div>
 
-  <div class="card hidden" id="seriesCard">
-    <div class="step">
-      <div class="num">2</div>
-      <div>
-        <strong>시리즈 선택</strong>
-        <small id="seriesHelp">
-          사용 중인 시리즈를 선택하세요.
-        </small>
-      </div>
-    </div>
+  <div class="brand-grid">
 
-    <div id="seriesGrid" class="category-grid"></div>
-  </div>
-
-  <div class="card hidden" id="modelCard">
-    <div class="step">
-      <div class="num">3</div>
-      <div>
-        <strong>정확한 기종 선택</strong>
-        <small>내 휴대폰과 같은 기종을 누르세요.</small>
-      </div>
-    </div>
-
-    <div id="modelList" class="model-list"></div>
-
-    <button type="button" class="more-btn" id="manualToggle">
-      내 기종이 없어요
+    <button class="brand-btn" data-brand="iphone">
+      아이폰
     </button>
 
-    <div class="manual hidden" id="manualBox">
-      <p id="manualGuide"></p>
-      <input
-        id="manualModel"
-        class="input"
-        placeholder="모델번호 입력"
-      >
+    <button class="brand-btn" data-brand="galaxy">
+      갤럭시
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="card hidden" id="seriesCard">
+
+  <div class="step">
+    <div class="num">2</div>
+
+    <div>
+      <strong>시리즈 선택</strong>
+      <small>사용 중인 시리즈를 선택하세요.</small>
     </div>
   </div>
 
-  <div class="card hidden" id="conditionCard">
-    <div class="step">
-      <div class="num">4</div>
-      <div>
-        <strong>아이폰 상태 선택</strong>
-        <small>아이폰 15 이하에서만 선택합니다.</small>
-      </div>
-    </div>
+  <div
+    class="category-grid"
+    id="seriesGrid">
+  </div>
 
-    <div class="condition-grid">
+</div>
 
-      <button
-        type="button"
-        class="condition-btn"
-        data-condition="ULK"
-      >
-        자급제
-      </button>
 
-      <button
-        type="button"
-        class="condition-btn"
-        data-condition="R"
-      >
-        리퍼
-      </button>
+<div class="card hidden" id="modelCard">
 
-      <button
-        type="button"
-        class="condition-btn"
-        data-condition="UD"
-      >
-        중고
-      </button>
+  <div class="step">
+    <div class="num">3</div>
 
-      <button
-        type="button"
-        class="condition-btn"
-        data-condition="TAC"
-      >
-        외산
-      </button>
-
-    </div>
-
-    <div class="condition-note">
-      자급제 ULK · 애플 정식 리퍼 R · 개인거래/중고매입 UD · 해외판 TAC
+    <div>
+      <strong>기종 선택</strong>
+      <small>내 휴대폰과 같은 기종을 누르세요.</small>
     </div>
   </div>
 
-  <div class="card hidden" id="storageCard">
-    <div class="step">
-      <div class="num" id="storageStepNum">4</div>
-      <div>
-        <strong>저장용량 선택</strong>
-        <small>사용 중인 휴대폰의 용량을 누르세요.</small>
-      </div>
-    </div>
-
-    <div id="storageGrid" class="storage-grid"></div>
-
-    <div id="selectedInfo" class="selected">
-      기종을 먼저 선택하세요.
-    </div>
+  <div
+    class="model-list"
+    id="modelList">
   </div>
 
-  <div class="result-card">
-    <div class="result-label">
-      앤텔레콤 입력용 모델명
+</div>
+
+
+<div class="card hidden" id="purchaseCard">
+
+  <div class="step">
+
+    <div class="num">4</div>
+
+    <div>
+      <strong>이 휴대폰은 어떻게 구입하셨나요?</strong>
+      <small>자급제 같은 용어를 몰라도 됩니다.</small>
     </div>
 
-    <div id="result" class="result">
-      기종과 용량을 선택하세요.
-    </div>
+  </div>
+
+  <div class="purchase-grid">
 
     <button
-      type="button"
-      id="copyBtn"
-      class="copy"
-      disabled
-    >
-      모델명 복사
+      class="choice"
+      data-purchase="new">
+      애플스토어·쿠팡 등에서 새제품 구매
     </button>
 
-    <div id="status" class="status"></div>
+    <button
+      class="choice"
+      data-purchase="carrier">
+      SKT·KT·LG U+에서 새폰 구매
+    </button>
+
+    <button
+      class="choice"
+      data-purchase="used">
+      중고로 구매
+    </button>
+
+    <button
+      class="choice"
+      data-purchase="refurb">
+      애플 리퍼 제품
+    </button>
+
+    <button
+      class="choice"
+      data-purchase="overseas">
+      해외에서 구매
+    </button>
+
+    <button
+      class="choice"
+      data-purchase="unknown">
+      잘 모르겠어요
+    </button>
+
   </div>
+
+  <div
+    class="manual hidden"
+    id="manualBox">
+
+    <p id="manualGuide"></p>
+
+    <input
+      class="input"
+      id="manualModel"
+      placeholder="예: A3106">
+
+  </div>
+
+  <div
+    class="note hidden"
+    id="purchaseNote">
+  </div>
+
+</div>
+
+
+<div class="card hidden" id="storageCard">
+
+  <div class="step">
+
+    <div
+      class="num"
+      id="storageStep">
+      4
+    </div>
+
+    <div>
+      <strong>저장용량 선택</strong>
+      <small>휴대폰 용량을 선택하세요.</small>
+    </div>
+
+  </div>
+
+  <div
+    class="storage-grid"
+    id="storageGrid">
+  </div>
+
+  <div
+    class="selected"
+    id="selectedInfo">
+  </div>
+
+</div>
+
+
+<div class="result-card">
+
+  <div class="result-label">
+    앤텔레콤 입력용 모델명
+  </div>
+
+  <div
+    class="result"
+    id="result">
+    기종과 용량을 선택하세요.
+  </div>
+
+  <button
+    class="copy"
+    id="copyBtn"
+    disabled>
+    모델명 복사
+  </button>
+
+  <div
+    class="status"
+    id="status">
+  </div>
+
+</div>
 
 </main>
 
 <script>
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+  document.getElementById(id);
+
 
 const data = {
 
-  iphone: {
-
-    series:[
-      "17",
-      "16",
-      "15",
-      "14",
-      "13",
-      "12",
-      "11",
-      "XS·XR",
-      "SE"
-    ],
-
-    models:{
-
-      "17":[
-
-        {
-          name:"iPhone 17",
-          code:"ULK-UIP17",
-          storages:["256","512"]
-        },
-
-        {
-          name:"iPhone 17 Air",
-          code:"ULK-UIPA",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 17 Pro",
-          code:"ULK-UIP17PR",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 17 Pro Max",
-          code:"ULK-UIP17PM",
-          storages:["256","512","1TB","2TB"]
-        }
-
-      ],
-
-      "16":[
-
-        {
-          name:"iPhone 16",
-          code:"ULK-UIP16",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 16 Plus",
-          code:"ULK-UIP16PL",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 16 Pro",
-          code:"ULK-UIP16PR",
-          storages:["128","256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 16 Pro Max",
-          code:"ULK-UIP16PM",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "15":[
-
-        {
-          name:"iPhone 15",
-          code:"ULK-A3090",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 15 Plus",
-          code:"ULK-A3094",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 15 Pro",
-          code:"ULK-A3102",
-          storages:["128","256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 15 Pro Max",
-          code:"ULK-A3106",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "14":[
-
-        {
-          name:"iPhone 14",
-          code:"ULK-A2882",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 14 Plus",
-          code:"ULK-A2886",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 14 Pro",
-          code:"ULK-A2890",
-          storages:["128","256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 14 Pro Max",
-          code:"ULK-A2894",
-          storages:["128","256","512","1TB"]
-        }
-
-      ],
-
-      "13":[
-
-        {
-          name:"iPhone 13 mini",
-          code:"ULK-A2628",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 13",
-          code:"ULK-A2633",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 13 Pro",
-          code:"ULK-A2638",
-          storages:["128","256","512","1TB"]
-        },
-
-        {
-          name:"iPhone 13 Pro Max",
-          code:"ULK-A2643",
-          storages:["128","256","512","1TB"]
-        }
-
-      ],
-
-      "12":[
-
-        {
-          name:"iPhone 12 mini",
-          code:"ULK-A2399",
-          storages:["64","128","256"]
-        },
-
-        {
-          name:"iPhone 12",
-          code:"ULK-A2403",
-          storages:["64","128","256"]
-        },
-
-        {
-          name:"iPhone 12 Pro",
-          code:"ULK-A2407",
-          storages:["128","256","512"]
-        },
-
-        {
-          name:"iPhone 12 Pro Max",
-          code:"ULK-A2411",
-          storages:["128","256","512"]
-        }
-
-      ],
-
-      "11":[
-
-        {
-          name:"iPhone 11",
-          code:"ULK-A2221",
-          storages:["64","128","256"]
-        },
-
-        {
-          name:"iPhone 11 Pro",
-          code:"ULK-A2215",
-          storages:["64","256","512"]
-        },
-
-        {
-          name:"iPhone 11 Pro Max",
-          code:"ULK-A2218",
-          storages:["64","256","512"]
-        }
-
-      ],
-
-      "XS·XR":[
-
-        {
-          name:"iPhone XR",
-          code:"ULK-A2105",
-          storages:["64","128","256"]
-        },
-
-        {
-          name:"iPhone XS",
-          code:"ULK-A2097",
-          storages:["64","256","512"]
-        },
-
-        {
-          name:"iPhone XS Max",
-          code:"ULK-A2101",
-          storages:["64","256","512"]
-        }
-
-      ],
-
-      "SE":[
-
-        {
-          name:"iPhone SE 3세대",
-          code:"ULK-A2783",
-          storages:["64","128","256"]
-        },
-
-        {
-          name:"iPhone SE 2세대",
-          code:"ULK-A2296",
-          storages:["64","128","256"]
-        }
-
-      ]
-
-    }
-
-  },
-
-  galaxy:{
-
-    series:[
-      "S26",
-      "S25",
-      "S24",
-      "S23",
-      "S22",
-      "S21",
-      "S20",
-      "Z Fold",
-      "Z Flip"
-    ],
-
-    models:{
-
-      "S26":[
-
-        {
-          name:"Galaxy S26",
-          code:"SM-S942N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S26+",
-          code:"SM-S947N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S26 Ultra",
-          code:"SM-S948N",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "S25":[
-
-        {
-          name:"Galaxy S25",
-          code:"SM-S931N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S25+",
-          code:"SM-S936N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S25 Edge",
-          code:"SM-S937N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S25 Ultra",
-          code:"SM-S938N",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "S24":[
-
-        {
-          name:"Galaxy S24",
-          code:"SM-S921N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S24+",
-          code:"SM-S926N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S24 Ultra",
-          code:"SM-S928N",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "S23":[
-
-        {
-          name:"Galaxy S23",
-          code:"SM-S911N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S23+",
-          code:"SM-S916N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy S23 Ultra",
-          code:"SM-S918N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy S23 FE",
-          code:"SM-S711N",
-          storages:["256"]
-        }
-
-      ],
-
-      "S22":[
-
-        {
-          name:"Galaxy S22",
-          code:"SM-S901N",
-          storages:["256"]
-        },
-
-        {
-          name:"Galaxy S22+",
-          code:"SM-S906N",
-          storages:["256"]
-        },
-
-        {
-          name:"Galaxy S22 Ultra",
-          code:"SM-S908N",
-          storages:["256","512","1TB"]
-        }
-
-      ],
-
-      "S21":[
-
-        {
-          name:"Galaxy S21",
-          code:"SM-G991N",
-          storages:["256"]
-        },
-
-        {
-          name:"Galaxy S21+",
-          code:"SM-G996N",
-          storages:["256"]
-        },
-
-        {
-          name:"Galaxy S21 Ultra",
-          code:"SM-G998N",
-          storages:["256","512"]
-        }
-
-      ],
-
-      "S20":[
-
-        {
-          name:"Galaxy S20",
-          code:"SM-G981N",
-          storages:["128"]
-        },
-
-        {
-          name:"Galaxy S20+",
-          code:"SM-G986N",
-          storages:["256"]
-        },
-
-        {
-          name:"Galaxy S20 Ultra",
-          code:"SM-G988N",
-          storages:["256"]
-        }
-
-      ],
-
-      "Z Fold":[
-
-        {
-          name:"Galaxy Z Fold8",
-          code:"SM-F971N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy Z Fold7",
-          code:"SM-F966N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy Z Fold6",
-          code:"SM-F956N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy Z Fold5",
-          code:"SM-F946N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy Z Fold4",
-          code:"SM-F936N",
-          storages:["256","512","1TB"]
-        },
-
-        {
-          name:"Galaxy Z Fold3",
-          code:"SM-F926N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Fold2",
-          code:"SM-F916N",
-          storages:["256"]
-        }
-
-      ],
-
-      "Z Flip":[
-
-        {
-          name:"Galaxy Z Flip8",
-          code:"SM-F776N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Flip7",
-          code:"SM-F766N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Flip6",
-          code:"SM-F741N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Flip5",
-          code:"SM-F731N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Flip4",
-          code:"SM-F721N",
-          storages:["256","512"]
-        },
-
-        {
-          name:"Galaxy Z Flip3",
-          code:"SM-F711N",
-          storages:["256"]
-        }
-
-      ]
-
-    }
-
-  }
+iphone:{
+
+series:[
+  "17",
+  "16",
+  "15",
+  "14",
+  "13",
+  "12",
+  "11",
+  "XS·XR",
+  "SE"
+],
+
+models:{
+
+"17":[
+
+  [
+    "iPhone 17",
+    "ULK-UIP17",
+    ["256","512"]
+  ],
+
+  [
+    "iPhone 17 Air",
+    "ULK-UIPA",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "iPhone 17 Pro",
+    "ULK-UIP17PR",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "iPhone 17 Pro Max",
+    "ULK-UIP17PM",
+    ["256","512","1TB","2TB"]
+  ]
+
+],
+
+
+"16":[
+
+  [
+    "iPhone 16",
+    "ULK-UIP16",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 16 Plus",
+    "ULK-UIP16PL",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 16 Pro",
+    "ULK-UIP16PR",
+    ["128","256","512","1TB"]
+  ],
+
+  [
+    "iPhone 16 Pro Max",
+    "ULK-UIP16PM",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"15":[
+
+  [
+    "iPhone 15",
+    "A3090",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 15 Plus",
+    "A3094",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 15 Pro",
+    "A3102",
+    ["128","256","512","1TB"]
+  ],
+
+  [
+    "iPhone 15 Pro Max",
+    "A3106",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"14":[
+
+  [
+    "iPhone 14",
+    "A2882",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 14 Plus",
+    "A2886",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 14 Pro",
+    "A2890",
+    ["128","256","512","1TB"]
+  ],
+
+  [
+    "iPhone 14 Pro Max",
+    "A2894",
+    ["128","256","512","1TB"]
+  ]
+
+],
+
+
+"13":[
+
+  [
+    "iPhone 13 mini",
+    "A2628",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 13",
+    "A2633",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 13 Pro",
+    "A2638",
+    ["128","256","512","1TB"]
+  ],
+
+  [
+    "iPhone 13 Pro Max",
+    "A2643",
+    ["128","256","512","1TB"]
+  ]
+
+],
+
+
+"12":[
+
+  [
+    "iPhone 12 mini",
+    "A2399",
+    ["64","128","256"]
+  ],
+
+  [
+    "iPhone 12",
+    "A2403",
+    ["64","128","256"]
+  ],
+
+  [
+    "iPhone 12 Pro",
+    "A2407",
+    ["128","256","512"]
+  ],
+
+  [
+    "iPhone 12 Pro Max",
+    "A2411",
+    ["128","256","512"]
+  ]
+
+],
+
+
+"11":[
+
+  [
+    "iPhone 11",
+    "A2221",
+    ["64","128","256"]
+  ],
+
+  [
+    "iPhone 11 Pro",
+    "A2215",
+    ["64","256","512"]
+  ],
+
+  [
+    "iPhone 11 Pro Max",
+    "A2218",
+    ["64","256","512"]
+  ]
+
+],
+
+
+"XS·XR":[
+
+  [
+    "iPhone XR",
+    "A2105",
+    ["64","128","256"]
+  ],
+
+  [
+    "iPhone XS",
+    "A2097",
+    ["64","256","512"]
+  ],
+
+  [
+    "iPhone XS Max",
+    "A2101",
+    ["64","256","512"]
+  ]
+
+],
+
+
+"SE":[
+
+  [
+    "iPhone SE 3세대",
+    "A2783",
+    ["64","128","256"]
+  ],
+
+  [
+    "iPhone SE 2세대",
+    "A2296",
+    ["64","128","256"]
+  ]
+
+]
+
+}
+
+},
+
+
+galaxy:{
+
+series:[
+  "S26",
+  "S25",
+  "S24",
+  "S23",
+  "S22",
+  "S21",
+  "S20",
+  "Z Fold",
+  "Z Flip"
+],
+
+models:{
+
+"S26":[
+
+  [
+    "Galaxy S26",
+    "SM-S942N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S26+",
+    "SM-S947N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S26 Ultra",
+    "SM-S948N",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"S25":[
+
+  [
+    "Galaxy S25",
+    "SM-S931N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S25+",
+    "SM-S936N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S25 Edge",
+    "SM-S937N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S25 Ultra",
+    "SM-S938N",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"S24":[
+
+  [
+    "Galaxy S24",
+    "SM-S921N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S24+",
+    "SM-S926N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S24 Ultra",
+    "SM-S928N",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"S23":[
+
+  [
+    "Galaxy S23",
+    "SM-S911N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S23+",
+    "SM-S916N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy S23 Ultra",
+    "SM-S918N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy S23 FE",
+    "SM-S711N",
+    ["256"]
+  ]
+
+],
+
+
+"S22":[
+
+  [
+    "Galaxy S22",
+    "SM-S901N",
+    ["256"]
+  ],
+
+  [
+    "Galaxy S22+",
+    "SM-S906N",
+    ["256"]
+  ],
+
+  [
+    "Galaxy S22 Ultra",
+    "SM-S908N",
+    ["256","512","1TB"]
+  ]
+
+],
+
+
+"S21":[
+
+  [
+    "Galaxy S21",
+    "SM-G991N",
+    ["256"]
+  ],
+
+  [
+    "Galaxy S21+",
+    "SM-G996N",
+    ["256"]
+  ],
+
+  [
+    "Galaxy S21 Ultra",
+    "SM-G998N",
+    ["256","512"]
+  ]
+
+],
+
+
+"S20":[
+
+  [
+    "Galaxy S20",
+    "SM-G981N",
+    ["128"]
+  ],
+
+  [
+    "Galaxy S20+",
+    "SM-G986N",
+    ["256"]
+  ],
+
+  [
+    "Galaxy S20 Ultra",
+    "SM-G988N",
+    ["256"]
+  ]
+
+],
+
+
+"Z Fold":[
+
+  [
+    "Galaxy Z Fold8",
+    "SM-F971N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy Z Fold7",
+    "SM-F966N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy Z Fold6",
+    "SM-F956N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy Z Fold5",
+    "SM-F946N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy Z Fold4",
+    "SM-F936N",
+    ["256","512","1TB"]
+  ],
+
+  [
+    "Galaxy Z Fold3",
+    "SM-F926N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Fold2",
+    "SM-F916N",
+    ["256"]
+  ]
+
+],
+
+
+"Z Flip":[
+
+  [
+    "Galaxy Z Flip8",
+    "SM-F776N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Flip7",
+    "SM-F766N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Flip6",
+    "SM-F741N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Flip5",
+    "SM-F731N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Flip4",
+    "SM-F721N",
+    ["256","512"]
+  ],
+
+  [
+    "Galaxy Z Flip3",
+    "SM-F711N",
+    ["256"]
+  ]
+
+]
+
+}
+
+}
 
 };
 
 
-const manualStorages=[
-  "64",
-  "128",
-  "256",
-  "512",
-  "1TB",
-  "2TB"
-];
-
-
 let brand="";
 let series="";
-let selectedModel=null;
-let selectedStorage="";
-let manualMode=false;
-let iphoneCondition="";
+let model=null;
+let storage="";
+let purchase="";
+let manualA="";
 
 
-function isIphone15OrBelow(){
+function isOldIphone(){
 
-  if(brand!=="iphone") return false;
-
-  if(manualMode) return true;
-
-  if(!series) return false;
-
-  return ![
-    "16",
-    "17"
-  ].includes(series);
+  return (
+    brand==="iphone" &&
+    !["16","17"].includes(series)
+  );
 
 }
 
 
-function prefixForIphone(){
-
-  if(!isIphone15OrBelow()){
-    return "ULK";
-  }
-
-  return iphoneCondition || "";
-
-}
-
-
-function updateConditionVisibility(){
-
-  const needsCondition=
-    isIphone15OrBelow();
-
-  $("conditionCard")
-    .classList
-    .toggle(
-      "hidden",
-      !needsCondition
-    );
-
-  $("storageStepNum")
-    .textContent=
-      needsCondition
-        ? "5"
-        : "4";
-
-  if(!needsCondition){
-
-    iphoneCondition="";
-
-    document
-      .querySelectorAll(".condition-btn")
-      .forEach(
-        b=>b.classList.remove("active")
-      );
-
-  }
-
-}
-
-
-function storageLabel(s){
+function labelStorage(s){
 
   return s.includes("TB")
     ? s
@@ -1117,76 +1084,78 @@ function storageLabel(s){
 }
 
 
-function resetFromSeries(){
+function storageCode(s){
 
-  series="";
-  selectedModel=null;
-  selectedStorage="";
-  manualMode=false;
-  iphoneCondition="";
-
-  $("conditionCard")
-    .classList
-    .add("hidden");
-
-  document
-    .querySelectorAll(".condition-btn")
-    .forEach(
-      b=>b.classList.remove("active")
-    );
-
-  $("manualBox")
-    .classList
-    .add("hidden");
-
-  $("manualModel")
-    .value="";
-
-  $("modelCard")
-    .classList
-    .add("hidden");
-
-  $("storageCard")
-    .classList
-    .add("hidden");
-
-  updateResult();
+  return s==="1TB"
+    ? "1T"
+    : s==="2TB"
+    ? "2T"
+    : s;
 
 }
 
 
-function chooseBrand(next){
+function show(id,on=true){
 
-  brand=next;
-
-  resetFromSeries();
-
-  document
-    .querySelectorAll(".brand-btn")
-    .forEach(btn=>{
-
-      btn.classList.toggle(
-        "active",
-        btn.dataset.brand===next
-      );
-
-    });
-
-  $("conditionCard")
+  $(id)
     .classList
-    .add("hidden");
+    .toggle(
+      "hidden",
+      !on
+    );
 
-  $("seriesCard")
-    .classList
-    .remove("hidden");
+}
 
-  $("seriesHelp")
-    .textContent=
-      next==="iphone"
-        ? "사용 중인 아이폰 세대를 선택하세요."
-        : "사용 중인 갤럭시 시리즈를 선택하세요.";
 
-  renderSeries();
+function scrollToCard(id){
+
+  setTimeout(
+    ()=>{
+
+      $(id)
+        .scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+    },
+    80
+  );
+
+}
+
+
+function clearAfterBrand(){
+
+  series="";
+  model=null;
+  storage="";
+  purchase="";
+  manualA="";
+
+  show(
+    "seriesCard"
+  );
+
+  show(
+    "modelCard",
+    false
+  );
+
+  show(
+    "purchaseCard",
+    false
+  );
+
+  show(
+    "storageCard",
+    false
+  );
+
+  $("manualModel")
+    .value="";
+
+  updateResult();
 
 }
 
@@ -1203,9 +1172,9 @@ function renderSeries(){
     .forEach(s=>{
 
       const b=
-        document.createElement("button");
-
-      b.type="button";
+        document.createElement(
+          "button"
+        );
 
       b.className=
         "cat-btn"+
@@ -1217,56 +1186,39 @@ function renderSeries(){
 
       b.textContent=s;
 
-      b.addEventListener(
-        "click",
-        ()=>{
+      b.onclick=()=>{
 
-          series=s;
+        series=s;
+        model=null;
+        storage="";
+        purchase="";
+        manualA="";
 
-          selectedModel=null;
-          selectedStorage="";
-          manualMode=false;
-          iphoneCondition="";
+        renderSeries();
 
-          $("conditionCard")
-            .classList
-            .add("hidden");
+        renderModels();
 
-          document
-            .querySelectorAll(".condition-btn")
-            .forEach(
-              b=>b.classList.remove("active")
-            );
+        show(
+          "modelCard"
+        );
 
-          $("manualBox")
-            .classList
-            .add("hidden");
+        show(
+          "purchaseCard",
+          false
+        );
 
-          $("manualModel")
-            .value="";
+        show(
+          "storageCard",
+          false
+        );
 
-          renderSeries();
+        updateResult();
 
-          renderModels();
+        scrollToCard(
+          "modelCard"
+        );
 
-          $("modelCard")
-            .classList
-            .remove("hidden");
-
-          $("storageCard")
-            .classList
-            .add("hidden");
-
-          updateResult();
-
-          $("modelCard")
-            .scrollIntoView({
-              behavior:"smooth",
-              block:"start"
-            });
-
-        }
-      );
+      };
 
       box.appendChild(b);
 
@@ -1282,103 +1234,237 @@ function renderModels(){
 
   box.innerHTML="";
 
-  const list=
+  (
     data[brand]
-      .models[series] || [];
-
-  list.forEach(m=>{
+      .models[series] || []
+  )
+  .forEach(m=>{
 
     const b=
-      document.createElement("button");
-
-    b.type="button";
+      document.createElement(
+        "button"
+      );
 
     b.className=
       "model-btn"+
       (
-        selectedModel?.code===m.code
+        model===m
           ? " active"
           : ""
       );
 
-    b.innerHTML=
-      `${m.name}
-      <span class="model-sub">
-        ${m.code.replace("ULK-","")}
-      </span>`;
+    b.textContent=
+      m[0];
 
-    b.addEventListener(
-      "click",
-      ()=>{
+    b.onclick=()=>{
 
-        selectedModel=m;
-        selectedStorage="";
-        manualMode=false;
-        iphoneCondition="";
+      model=m;
+      storage="";
+      purchase="";
+      manualA="";
 
-        document
-          .querySelectorAll(".condition-btn")
-          .forEach(
-            b=>b.classList.remove("active")
-          );
+      renderModels();
 
-        $("manualBox")
-          .classList
-          .add("hidden");
+      if(
+        isOldIphone()
+      ){
 
-        $("manualModel")
-          .value="";
+        show(
+          "purchaseCard"
+        );
 
-        renderModels();
+        show(
+          "storageCard",
+          false
+        );
 
-        updateConditionVisibility();
+        $("storageStep")
+          .textContent="5";
+
+        resetPurchaseButtons();
+
+        show(
+          "manualBox",
+          false
+        );
+
+        show(
+          "purchaseNote",
+          false
+        );
+
+        scrollToCard(
+          "purchaseCard"
+        );
+
+      }
+
+      else{
+
+        show(
+          "purchaseCard",
+          false
+        );
+
+        show(
+          "storageCard"
+        );
+
+        $("storageStep")
+          .textContent="4";
 
         renderStorage();
 
-        updateResult();
-
-        if(isIphone15OrBelow()){
-
-          $("storageCard")
-            .classList
-            .add("hidden");
-
-          $("conditionCard")
-            .classList
-            .remove("hidden");
-
-          $("conditionCard")
-            .scrollIntoView({
-              behavior:"smooth",
-              block:"start"
-            });
-
-        }
-
-        else{
-
-          $("conditionCard")
-            .classList
-            .add("hidden");
-
-          $("storageCard")
-            .classList
-            .remove("hidden");
-
-          $("storageCard")
-            .scrollIntoView({
-              behavior:"smooth",
-              block:"start"
-            });
-
-        }
+        scrollToCard(
+          "storageCard"
+        );
 
       }
-    );
+
+      updateResult();
+
+    };
 
     box.appendChild(b);
 
   });
+
+}
+
+
+function resetPurchaseButtons(){
+
+  document
+    .querySelectorAll(
+      ".choice"
+    )
+    .forEach(
+      x=>
+        x.classList.remove(
+          "active"
+        )
+    );
+
+}
+
+
+function choosePurchase(
+  p,
+  btn
+){
+
+  purchase=p;
+  storage="";
+  manualA="";
+
+  $("manualModel")
+    .value="";
+
+  resetPurchaseButtons();
+
+  btn.classList
+    .add("active");
+
+  show(
+    "manualBox",
+    false
+  );
+
+  show(
+    "purchaseNote",
+    false
+  );
+
+
+  if(
+    p==="new"
+  ){
+
+    show(
+      "storageCard"
+    );
+
+    renderStorage();
+
+    scrollToCard(
+      "storageCard"
+    );
+
+  }
+
+
+  else if(
+    [
+      "used",
+      "refurb",
+      "overseas"
+    ]
+    .includes(p)
+  ){
+
+    show(
+      "manualBox"
+    );
+
+    $("manualGuide")
+      .innerHTML=
+        "<b>설정 → 일반 → 정보 → 모델 번호</b>를 한 번 눌러 A로 시작하는 번호를 입력하세요.<br><br>중고·리퍼·해외폰은 실제 단말의 A번호를 확인하는 것이 가장 안전합니다.";
+
+    show(
+      "storageCard"
+    );
+
+    renderStorage();
+
+    scrollToCard(
+      "manualBox"
+    );
+
+  }
+
+
+  else if(
+    p==="carrier"
+  ){
+
+    show(
+      "purchaseNote"
+    );
+
+    $("purchaseNote")
+      .innerHTML=
+        "<b>SKT·KT·LG U+에서 구입한 폰</b><br><br>약정이 끝났더라도 구매 경로가 자급제로 바뀌는 것은 아닙니다.<br><br>현재는 통신사 출고폰의 모델명 코드를 임의로 생성하지 않습니다. 실제 모델번호를 확인한 뒤 상담 확인이 필요합니다.";
+
+    show(
+      "storageCard",
+      false
+    );
+
+  }
+
+
+  else{
+
+    show(
+      "manualBox"
+    );
+
+    $("manualGuide")
+      .innerHTML=
+        "<b>잘 모르겠다면 모델번호부터 확인하세요.</b><br><br>설정 → 일반 → 정보 → 모델 번호를 한 번 눌러 A로 시작하는 번호를 확인해 주세요.<br><br>구입 경로가 확인되지 않으면 최종 모델명은 상담 확인이 필요합니다.";
+
+    show(
+      "storageCard",
+      false
+    );
+
+    scrollToCard(
+      "manualBox"
+    );
+
+  }
+
+  updateResult();
 
 }
 
@@ -1390,47 +1476,65 @@ function renderStorage(){
 
   box.innerHTML="";
 
-  const list=
-    manualMode
-      ? manualStorages
-      : (
-          selectedModel?.storages || []
+  if(
+    !model
+  ){
+    return;
+  }
+
+  model[2]
+    .forEach(s=>{
+
+      const b=
+        document.createElement(
+          "button"
         );
 
-  list.forEach(s=>{
+      b.className=
+        "storage-btn"+
+        (
+          storage===s
+            ? " active"
+            : ""
+        );
 
-    const b=
-      document.createElement("button");
+      b.textContent=
+        labelStorage(s);
 
-    b.type="button";
+      b.onclick=()=>{
 
-    b.className=
-      "storage-btn"+
-      (
-        selectedStorage===s
-          ? " active"
-          : ""
-      );
-
-    b.textContent=
-      storageLabel(s);
-
-    b.addEventListener(
-      "click",
-      ()=>{
-
-        selectedStorage=s;
+        storage=s;
 
         renderStorage();
 
         updateResult();
 
-      }
-    );
+      };
 
-    box.appendChild(b);
+      box.appendChild(b);
 
-  });
+    });
+
+}
+
+
+function currentA(){
+
+  const typed=
+    $("manualModel")
+      .value
+      .trim()
+      .toUpperCase()
+      .replace(
+        /\s/g,
+        ""
+      );
+
+  return (
+    typed ||
+    model?.[1] ||
+    ""
+  );
 
 }
 
@@ -1438,116 +1542,140 @@ function renderStorage(){
 function updateResult(){
 
   let value="";
+  let msg=
+    "기종과 용량을 선택하세요.";
+
   let info="";
 
-  if(manualMode){
 
-    const m=
-      $("manualModel")
-        .value
-        .trim()
-        .toUpperCase()
-        .replace(/\s/g,"");
+  if(
+    model
+  ){
 
-    if(m){
+    info=
+      "<b>"+
+      model[0]+
+      "</b>";
 
-      info=
-        `<b>${m}</b>${
-          selectedStorage
-            ? " · "+storageLabel(selectedStorage)
-            : ""
-        }`;
+    if(
+      storage
+    ){
 
-      if(selectedStorage){
-
-        if(brand==="iphone"){
-
-          const prefix=
-            prefixForIphone();
-
-          if(prefix){
-
-            value=
-              `${prefix}-${m}-${selectedStorage}`;
-
-          }
-
-        }
-
-        else{
-
-          value=
-            `OMD-${m}${selectedStorage}`;
-
-        }
-
-      }
-
-    }
-
-    else{
-
-      info=
-        "모델번호를 입력하세요.";
+      info+=
+        " · "+
+        labelStorage(storage);
 
     }
 
   }
 
-  else if(selectedModel){
 
-    info=
-      `<b>${selectedModel.name}</b>${
-        selectedStorage
-          ? " · "+storageLabel(selectedStorage)
-          : ""
+  if(
+    brand==="galaxy" &&
+    model &&
+    storage
+  ){
+
+    value=
+      `OMD-${model[1]}${
+        storage==="1TB"
+          ? "1TB"
+          : storage==="2TB"
+          ? "2TB"
+          : storage
       }`;
 
-    if(selectedStorage){
+  }
 
-      if(brand==="iphone"){
 
-        if(isIphone15OrBelow()){
+  else if(
+    brand==="iphone" &&
+    model &&
+    !isOldIphone() &&
+    storage
+  ){
 
-          const prefix=
-            prefixForIphone();
+    value=
+      `${model[1]}-${storageCode(storage)}`;
 
-          const aModel=
-            selectedModel.code
-              .replace(
-                /^ULK-/,
-                ""
-              );
+  }
 
-          if(prefix){
 
-            value=
-              `${prefix}-${aModel}-${selectedStorage}`;
+  else if(
+    isOldIphone() &&
+    model
+  ){
 
-          }
+    if(
+      !purchase
+    ){
 
-        }
+      msg=
+        "휴대폰을 어떻게 구입했는지 선택하세요.";
 
-        else{
+    }
 
-          const storageCode=
-            selectedStorage==="1TB"
-              ? "1T"
-              : selectedStorage==="2TB"
-              ? "2T"
-              : selectedStorage;
 
-          value=
-            `${selectedModel.code}-${storageCode}`;
+    else if(
+      purchase==="carrier"
+    ){
 
-        }
+      msg=
+        "통신사 구입폰은 모델번호 확인 후 상담이 필요합니다.";
+
+    }
+
+
+    else if(
+      purchase==="unknown"
+    ){
+
+      msg=
+        "구입 경로 확인 후 최종 코드를 생성할 수 있습니다.";
+
+    }
+
+
+    else{
+
+      const prefix={
+
+        new:"ULK",
+        used:"UD",
+        refurb:"R",
+        overseas:"TAC"
+
+      }[purchase];
+
+
+      const a=
+        currentA();
+
+
+      if(
+        !a
+      ){
+
+        msg=
+          "A로 시작하는 모델번호를 입력하세요.";
 
       }
+
+
+      else if(
+        !storage
+      ){
+
+        msg=
+          "저장용량을 선택하세요.";
+
+      }
+
 
       else{
 
         value=
-          `OMD-${selectedModel.code}${selectedStorage}`;
+          `${prefix}-${a}-${storageCode(storage)}`;
 
       }
 
@@ -1555,292 +1683,159 @@ function updateResult(){
 
   }
 
-  else{
-
-    info=
-      "기종을 먼저 선택하세요.";
-
-  }
 
   $("selectedInfo")
     .innerHTML=
-      info;
+      info ||
+      "기종을 먼저 선택하세요.";
 
-  let emptyText=
-    "기종과 용량을 선택하세요.";
-
-  if(
-    isIphone15OrBelow() &&
-    (
-      selectedModel ||
-      manualMode
-    ) &&
-    !iphoneCondition
-  ){
-
-    emptyText=
-      "자급제·리퍼·중고·외산 중 하나를 선택하세요.";
-
-  }
 
   $("result")
     .textContent=
-      value || emptyText;
+      value ||
+      msg;
+
 
   $("copyBtn")
     .disabled=
       !value;
 
+
   $("copyBtn")
     .dataset.value=
-      value || "";
+      value;
 
 }
 
 
 document
-  .querySelectorAll(".condition-btn")
-  .forEach(btn=>{
+  .querySelectorAll(
+    ".brand-btn"
+  )
+  .forEach(b=>{
 
-    btn.addEventListener(
-      "click",
-      ()=>{
+    b.onclick=()=>{
 
-        iphoneCondition=
-          btn.dataset.condition;
+      brand=
+        b.dataset.brand;
 
-        document
-          .querySelectorAll(".condition-btn")
-          .forEach(b=>{
+      document
+        .querySelectorAll(
+          ".brand-btn"
+        )
+        .forEach(x=>{
 
-            b.classList.toggle(
-              "active",
-              b===btn
-            );
+          x.classList.toggle(
+            "active",
+            x===b
+          );
 
-          });
+        });
 
-        selectedStorage="";
+      clearAfterBrand();
 
-        renderStorage();
+      renderSeries();
 
-        updateResult();
+      scrollToCard(
+        "seriesCard"
+      );
 
-        $("storageCard")
-          .classList
-          .remove("hidden");
-
-        $("storageCard")
-          .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-          });
-
-      }
-    );
+    };
 
   });
 
 
-$("manualToggle")
-  .addEventListener(
-    "click",
-    ()=>{
+document
+  .querySelectorAll(
+    ".choice"
+  )
+  .forEach(b=>{
 
-      manualMode=
-        !manualMode;
+    b.onclick=()=>{
 
-      selectedModel=null;
-      selectedStorage="";
+      choosePurchase(
+        b.dataset.purchase,
+        b
+      );
 
-      $("manualBox")
-        .classList
-        .toggle(
-          "hidden",
-          !manualMode
-        );
+    };
 
-      $("manualGuide")
-        .innerHTML=
-          brand==="iphone"
-            ? "<b>설정 → 일반 → 정보 → 모델 번호</b>에서 A로 시작하는 번호를 입력하세요."
-            : "<b>설정 → 휴대전화 정보</b>에서 SM-으로 시작하는 모델번호를 입력하세요.";
-
-      $("manualModel")
-        .placeholder=
-          brand==="iphone"
-            ? "예: A2894"
-            : "예: SM-S936N";
-
-      renderModels();
-
-      updateConditionVisibility();
-
-      renderStorage();
-
-      updateResult();
-
-      if(brand==="iphone"){
-
-        $("conditionCard")
-          .classList
-          .remove("hidden");
-
-        $("storageCard")
-          .classList
-          .add("hidden");
-
-        $("conditionCard")
-          .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-          });
-
-      }
-
-      else{
-
-        $("conditionCard")
-          .classList
-          .add("hidden");
-
-        $("storageCard")
-          .classList
-          .remove("hidden");
-
-      }
-
-    }
-  );
+  });
 
 
 $("manualModel")
   .addEventListener(
     "input",
-    updateResult
-  );
-
-
-document
-  .querySelectorAll(".brand-btn")
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      "click",
-      ()=>chooseBrand(
-        btn.dataset.brand
-      )
-    );
-
-  });
-
-
-$("resetBtn")
-  .addEventListener(
-    "click",
     ()=>{
 
-      brand="";
-      series="";
-      selectedModel=null;
-      selectedStorage="";
-      manualMode=false;
-      iphoneCondition="";
-
-      document
-        .querySelectorAll(".condition-btn")
-        .forEach(
-          btn=>btn.classList.remove("active")
-        );
-
-      document
-        .querySelectorAll(".brand-btn")
-        .forEach(
-          btn=>btn.classList.remove("active")
-        );
-
-      $("seriesCard")
-        .classList
-        .add("hidden");
-
-      $("modelCard")
-        .classList
-        .add("hidden");
-
-      $("storageCard")
-        .classList
-        .add("hidden");
-
-      $("conditionCard")
-        .classList
-        .add("hidden");
-
-      $("manualBox")
-        .classList
-        .add("hidden");
-
-      $("manualModel")
-        .value="";
-
-      $("status")
-        .textContent="";
+      manualA=
+        $("manualModel")
+          .value;
 
       updateResult();
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
 
     }
   );
 
 
 $("copyBtn")
-  .addEventListener(
-    "click",
+  .onclick=
     async()=>{
 
-      const value=
+      const v=
         $("copyBtn")
           .dataset.value;
 
-      if(!value) return;
+      if(
+        !v
+      ){
+        return;
+      }
+
 
       try{
 
         await navigator
           .clipboard
-          .writeText(value);
+          .writeText(v);
 
       }
+
 
       catch(e){
 
         const t=
-          document.createElement("textarea");
+          document.createElement(
+            "textarea"
+          );
 
-        t.value=value;
+        t.value=v;
 
-        document.body
+        document
+          .body
           .appendChild(t);
 
         t.select();
 
         document
-          .execCommand("copy");
+          .execCommand(
+            "copy"
+          );
 
         t.remove();
 
       }
 
+
       $("copyBtn")
         .textContent=
           "복사 완료";
 
+
       $("status")
         .textContent=
           "클립보드에 복사했습니다.";
+
 
       setTimeout(
         ()=>{
@@ -1856,8 +1851,63 @@ $("copyBtn")
         1200
       );
 
-    }
-  );
+    };
+
+
+$("resetBtn")
+  .onclick=()=>{
+
+    brand="";
+    series="";
+    model=null;
+    storage="";
+    purchase="";
+    manualA="";
+
+
+    document
+      .querySelectorAll(
+        ".brand-btn,.choice"
+      )
+      .forEach(
+        x=>
+          x.classList.remove(
+            "active"
+          )
+      );
+
+
+    [
+      "seriesCard",
+      "modelCard",
+      "purchaseCard",
+      "storageCard",
+      "manualBox",
+      "purchaseNote"
+    ]
+    .forEach(
+      id=>
+        show(
+          id,
+          false
+        )
+    );
+
+
+    $("manualModel")
+      .value="";
+
+
+    updateResult();
+
+
+    window
+      .scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+  };
 
 
 updateResult();
